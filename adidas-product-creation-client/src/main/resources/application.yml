@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: adidas-product-creation-client
+  data:
+    neo4j:
+      username: neo4j
+      password: neo4j
+        
+server:
+  port: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: discovery-eureka:8761/eureka
+  instance:
+    preferIpAddress: true

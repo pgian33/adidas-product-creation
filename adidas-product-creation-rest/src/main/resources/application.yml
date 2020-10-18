@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: adidas-product-creation-rest
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: discovery-eureka:8761/eureka
