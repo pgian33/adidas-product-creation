@@ -1,0 +1,55 @@
+package com.adidas.product.creation.rest.bean;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> extends ResponseEntity<T>  {
+
+	public ApiResponse(HttpStatus status) {
+		super(status);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ApiResponse(T result, HttpStatus status) {
+		super(result,status);
+		this.result = result;
+	}
+
+	public ApiResponse(String errorCode, String errorMessage, String errorDescription) {
+		this.error = new ApiError(errorCode, errorMessage, errorDescription);
+	}
+
+	public ApiResponse(String errorCode, String errorMessage) {
+		this.error = new ApiError(errorCode, errorMessage);
+	}
+
+	public ApiResponse(ApiError error) {
+		super(error.getMessage(),HttpStatus.valueOf(error.getCode().))
+		this.error = error;
+	}
+
+	private T result;
+	private ApiError error;
+
+
+
+	public T getResult() {
+		return this.result;
+	}
+
+	public void setResult(T result) {
+		this.result = result;
+	}
+
+	public ApiError getError() {
+		return this.error;
+	}
+
+	public void setError(ApiError error) {
+		this.error = error;
+	}
+}
+

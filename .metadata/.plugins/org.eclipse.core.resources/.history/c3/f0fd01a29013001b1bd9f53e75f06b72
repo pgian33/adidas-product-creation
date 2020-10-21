@@ -1,0 +1,15 @@
+package com.adidas.product.creation.model.integration.enumeration;
+
+public enum StatusEnumeration {
+	
+	SERVICE_UNKNOWN_ERROR("", "1000"),
+	SERVICE_NO_RESULTS("No results found for the given cities", "1001");
+	
+	private String value;
+	private String message;
+	
+	private StatusEnumeration(String value, String message) {
+		this.value = value;
+		this.message = message;
+	}
+}

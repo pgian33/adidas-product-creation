@@ -1,0 +1,25 @@
+package com.adidas.product.creation.client.exception;
+
+public enum ErrorCode {
+	
+	OK("OK", "Query performed correctly"),
+	GENERIC_ERROR("KO", "A generic error occurred"),
+	NOT_EXECUTABLE_QUERY("KO", "You must not execute the query with missing fields"),
+	NO_RESULTS_FOUND("KO", "No results found for the given input");
+
+	
+	private Integer status;
+	private String message;
+	
+	private ErrorCode(Integer status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+	public String getMessage() {
+		return message;
+	}
+}

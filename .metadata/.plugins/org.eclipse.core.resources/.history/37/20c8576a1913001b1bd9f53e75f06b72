@@ -1,0 +1,5 @@
+package com.adidas.product.creation.rest.decoder;
+
+public class SeriveExceptionDecoder {
+
+}

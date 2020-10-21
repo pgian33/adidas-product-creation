@@ -1,0 +1,5 @@
+package com.adidas.product.creation.model.integration.enumeration;
+
+public class StatusEnumeration {
+
+}

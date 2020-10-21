@@ -1,0 +1,19 @@
+package com.adidas.product.creation.rest.client;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.adidas.product.creation.rest.config.FeignConfig;
+import com.adidas.product.creation.rest.exception.IntegrationException;
+
+@FeignClient(url="adidas-product-creation-client", configuration = FeignConfig.class)
+public interface ProductCreationClient {
+	
+	@RequestMapping("/connections-shortest-path")
+	List<String> getConnectionsShortestPath(@RequestParam("departureCity") String departureCity, @RequestParam("destinationCity") String destinationCity) throws IntegrationException;
+
+	@RequestMapping("/time-shortest-path")
+	List<String> getTimeShortestPath(@RequestParam("departureCity") String departureCity, @RequestParam("destinationCity") String destinationCity) throws IntegrationException;
+
+}

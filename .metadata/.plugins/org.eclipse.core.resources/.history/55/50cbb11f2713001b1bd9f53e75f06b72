@@ -1,0 +1,8 @@
+package com.adidas.product.creation.rest.client;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public abstract class FactoryRestClient {
+
+}

@@ -1,0 +1,13 @@
+package com.adidas.product.creation.rest.bean;
+
+import org.springframework.http.ResponseEntity;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> extends ResponseEntity<T>  {
+	
+	
+	
+}
+

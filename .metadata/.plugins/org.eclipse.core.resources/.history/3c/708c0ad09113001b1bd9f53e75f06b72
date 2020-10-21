@@ -1,0 +1,22 @@
+package com.adidas.product.creation.client.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class Neo4jQueryException extends Exception {
+
+	private final String reason;
+	private final HttpStatus status;
+	
+	public Neo4jQueryException(String reason, HttpStatus status) {
+		this.reason = reason;
+		this.status = status;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public HttpStatus getStatus() {
+		return status;
+	}
+}

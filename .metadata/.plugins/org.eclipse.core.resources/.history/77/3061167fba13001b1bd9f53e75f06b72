@@ -1,0 +1,18 @@
+package com.adidas.product.creation.rest.bean;
+
+import org.springframework.http.HttpStatus;
+
+public enum ErrorCode {
+	GENERIC_ERROR(500, "A generic error occurred"),
+	DEPARTURE_CITY_MISSING(400, "Departure city must not be null/empty"),
+	DESTINATION_CITY_MISSING(400, "Departure city must not be null/empty");
+	
+	private Integer status;
+	private String message;
+	
+	private ErrorCode(Integer status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+	
+}

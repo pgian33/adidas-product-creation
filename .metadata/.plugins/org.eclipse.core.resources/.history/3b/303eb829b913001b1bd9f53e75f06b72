@@ -1,0 +1,15 @@
+package com.adidas.product.creation.rest.bean;
+
+public enum ErrorCode {
+	GENERIC_ERROR("100", "A generic error occurred"),
+	DEPARTURE_CITY_MISSING("101", "Departure city must not be null/empty"),
+	DESTINATION_CITY_MISSING("102", "Destination city must not be null/empty");
+	
+	private String value;
+	private String message;
+	
+	private ErrorCode(String value, String message) {
+		this.value = value;
+		this.message = message;
+	}
+}

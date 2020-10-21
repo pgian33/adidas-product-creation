@@ -1,0 +1,5 @@
+package com.adidas.product.creation.rest.client.decoder;
+
+public class ServiceExceptionDecoder {
+
+}

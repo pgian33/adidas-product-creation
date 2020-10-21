@@ -1,0 +1,36 @@
+package com.adidas.product.creation.rest.client;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public abstract class FactoryRestClient {
+
+	public final static <T> T createClient(
+			Class<T> typeClient, 
+			String uri, 
+			ErrorDecoder typeErrorDecode,
+			Long connectTimeout, 
+			String connectTimeoutUnit, 
+			Long readTimeout, 
+			String readTimeoutUnit, 
+			Boolean followRedirects 
+			) {
+
+
+		return Feign.builder()
+				.client(new OkHttpClient())
+				.options(new Request.Options(
+						connectTimeout, 
+						GiveTimeOut.from(connectTimeoutUnit),
+						readTimeout, 
+						GiveTimeOut.from(readTimeoutUnit),
+						followRedirects
+						))
+				.errorDecoder(typeErrorDecode)
+				.logger(new Slf4jLogger(typeClient))
+				.logLevel(Logger.Level.FULL)
+				.target(typeClient, uri);
+	}
+
+
+}

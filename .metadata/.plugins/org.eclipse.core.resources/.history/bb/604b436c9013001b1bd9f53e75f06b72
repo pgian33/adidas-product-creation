@@ -1,0 +1,7 @@
+package com.adidas.product.creation.model.integration.enumeration;
+
+public enum StatusEnumeration {
+	
+	private String value;
+	private String message;
+}

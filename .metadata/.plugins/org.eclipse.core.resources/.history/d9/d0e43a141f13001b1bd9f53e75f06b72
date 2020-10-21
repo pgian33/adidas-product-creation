@@ -1,0 +1,46 @@
+package com.adidas.product.creation.rest.helper;
+
+import java.util.List;
+import java.util.TreeMap;
+
+import com.adidas.product.creation.rest.bean.ShortestPathResponse;
+
+public class ProductCreationHelper {
+	
+	private ProductCreationHelper() {
+		throw new IllegalStateException("It's not possibile to instanciate an Helper class");
+	}
+	
+	private static TreeMap<Integer, String> getMapFromJson(List<String> citiesList) {
+		TreeMap<Integer, String> treeMap = new TreeMap<>();
+		for(int i = 0; i<citiesList.size(); i++) {
+			String aCity = citiesList.get(i);
+			treeMap.put(i+1, aCity);
+		}
+		return treeMap;
+	}
+
+	private static String getRepresentationFromJson(List<String> citiesList) {
+		String representation = "";
+		for(int i = 0; i<citiesList.size(); i++) {
+			String aCity = citiesList.get(i);
+			if(i != citiesList.size()-1) {
+				representation = representation + aCity + "->";
+			} else {
+				representation = representation + aCity;
+			}
+		}
+		return representation;
+	}
+
+	public static ShortestPathResponse getShortestPathFromJson(List<String> citiesList) {
+		TreeMap<Integer, String> treeMapCities = getMapFromJson(citiesList);
+		String representation = getRepresentationFromJson(citiesList);
+
+		ShortestPathResponse shortestPathResponse = new ShortestPathResponse();
+		shortestPathResponse.setShortestPathCitiesMap(treeMapCities);
+		shortestPathResponse.setShortesPathRepresentation(representation);
+
+		return shortestPathResponse;
+	}
+}

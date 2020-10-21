@@ -1,0 +1,24 @@
+package com.adidas.product.creation.rest.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.adidas.product.creation.rest.exception.IntegrationExceptionDecoder;
+
+import feign.Logger;
+import feign.codec.ErrorDecoder;
+
+@Configuration
+public class FeignConfig {
+
+	@Bean
+	public ErrorDecoder feignErrorDecoder() {
+		return new IntegrationExceptionDecoder();
+	}
+	
+	//BASIC – log only the request method, URL, and response status
+	@Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.BASIC;
+    }
+}

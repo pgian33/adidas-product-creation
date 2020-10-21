@@ -1,0 +1,25 @@
+package com.adidas.product.creation.client.exception;
+
+public enum ErrorCode {
+	
+	GENERIC_ERROR(101, "A generic error occurred"),
+	NOT_EXECUTABLE_QUERY(102, "You must not execute the query with missing fields"),
+	DESTINATION_CITY_MISSING(103, "Destination city must not be null/empty"),
+	NO_RESULTS_FOUND(104, "No itineraries found");
+	
+	
+	private Integer status;
+	private String message;
+	
+	private ErrorCode(Integer status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+	public String getMessage() {
+		return message;
+	}
+}

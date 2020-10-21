@@ -1,0 +1,5 @@
+package com.adidas.product.creation.rest.config;
+
+public class FeignConfig {
+
+}

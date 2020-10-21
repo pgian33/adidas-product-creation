@@ -1,0 +1,57 @@
+package com.adidas.product.creation.rest.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.adidas.product.creation.rest.bean.ApiError;
+import com.adidas.product.creation.rest.bean.ApiResponse;
+import com.adidas.product.creation.rest.bean.ErrorCode;
+import com.adidas.product.creation.rest.bean.ShortestPathRequest;
+import com.adidas.product.creation.rest.bean.ShortestPathResponse;
+import com.adidas.product.creation.rest.client.ProductCreationClient;
+import com.adidas.product.creation.rest.exception.IntegrationException;
+import com.adidas.product.creation.rest.helper.ProductCreationHelper;
+
+@Component
+@RestController
+@RequestMapping(value = "/")
+public class ShortestPathController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ShortestPathController.class);
+
+	@Autowired
+	private ProductCreationClient productCreationClient;
+
+	@PostMapping("/connections-shortest-path")
+	public ApiResponse<ShortestPathResponse> getConnectionsShortestPath(@RequestBody ShortestPathRequest shortestPathRequest) {
+		LOGGER.info(">> START getConnectionsShortestPath: shortestPathRequest={}", shortestPathRequest);
+		List<String> citiesList = new ArrayList<>();
+		try {
+			citiesList = productCreationClient.getConnectionsShortestPath(shortestPathRequest.getDepartureCity(), shortestPathRequest.getDestinationCity());
+			ShortestPathResponse shortestPathResponse = ProductCreationHelper.getShortestPathFromJson(citiesList);
+			return new ApiResponse<>(shortestPathResponse);
+		} catch (IntegrationException e) {
+			LOGGER.error("!! ERROR getConnectionsShortestPath: An IntegrationException occurred", e);
+			ApiError apiError = new ApiError(ErrorCode.GENERIC_ERROR.getValue(), "Generic error", e.getMessage());
+			return new ApiResponse<>(apiError);
+		}
+	}
+
+	@PostMapping("/time-shortest-path") 
+	public ResponseEntity<ShortestPathResponse> getTimeShortestPath(@RequestBody ShortestPathRequest shortestPathRequest) throws IntegrationException {
+		List<String> citiesList = productCreationClient.getTimeShortestPath(shortestPathRequest.getDepartureCity(), shortestPathRequest.getDestinationCity());
+		ShortestPathResponse shortestPathResponse = ProductCreationHelper.getShortestPathFromJson(citiesList);
+		return new ResponseEntity<>(shortestPathResponse, HttpStatus.OK);
+	}
+}

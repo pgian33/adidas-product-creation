@@ -1,0 +1,11 @@
+package com.adidas.product.creation.rest.bean;
+
+public class ApiResponse<T> {
+
+	private T result;
+	private ApiError error;
+	
+	public ApiResponse(T result) {
+		     this.result = result;
+	   }
+}

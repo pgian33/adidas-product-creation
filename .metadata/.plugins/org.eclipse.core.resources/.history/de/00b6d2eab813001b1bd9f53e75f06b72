@@ -1,0 +1,15 @@
+package com.adidas.product.creation.rest.bean;
+
+public enum ErrorCode {
+	GENERIC_ERROR("100");
+
+	private String value;
+
+	private ErrorCode(String value) {
+		this.value = value;
+	}
+
+	public String getValue() {
+		return this.value;
+	}
+}

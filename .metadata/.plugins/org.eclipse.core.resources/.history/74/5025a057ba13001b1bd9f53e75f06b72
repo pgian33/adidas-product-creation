@@ -1,0 +1,25 @@
+package com.adidas.product.creation.rest.bean;
+
+import org.apache.http.HttpStatus;
+
+public enum ErrorCode {
+	GENERIC_ERROR("100", "A generic error occurred"),
+	DEPARTURE_CITY_MISSING(, "Departure city must not be null/empty"),
+	DESTINATION_CITY_MISSING("102", "Destination city must not be null/empty");
+	
+	private HttpStatus status;
+	private String message;
+	
+	private ErrorCode(HttpStatus status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+
+	public HttpStatus getStatus() {
+		return status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+}

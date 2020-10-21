@@ -1,0 +1,25 @@
+package com.adidas.product.creation.rest;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.adidas.product.creation.rest.client.ProductCreationClient;
+
+@SpringBootTest
+class AdidasProductCreationRestApplicationTests {
+
+	@Autowired
+	private ProductCreationClient productCreationClient;
+
+	@Test
+	void contextLoads() {
+
+	}
+
+	@Test
+	void aa() {
+		productCreationClient.getConnectionsShortestPath("Zaragoza","Barcelona");
+	}
+
+}

@@ -1,0 +1,24 @@
+package com.adidas.product.creation.model.integration.enumeration;
+
+public enum StatusEnumeration {
+	
+	SERVICE_UNKNOWN_ERROR("", "1000"),
+	SERVICE_NO_RESULTS("No results found for the given cities", "1001"),
+	SERVICE_NO_VALID_INPUT_PARAMETERS("DepartureCity and DestinationCity must not be empty", "1002");
+	
+	private String message;
+	private String status;
+	
+	private StatusEnumeration(String message, String status) {
+		this.message = message;
+		this.message = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+}

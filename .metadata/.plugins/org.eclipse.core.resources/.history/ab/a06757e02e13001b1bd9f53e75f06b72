@@ -1,0 +1,39 @@
+package com.adidas.product.creation.rest.bean;
+
+public class ApiResponse<T> {
+
+	private T result;
+	private ApiError error;
+
+	public ApiResponse(T result) {
+		this.result = result;
+	}
+
+
+	public ApiResponse(String errorCode, String errorMessage, String errorDescription) {
+		this.error = new ApiError(errorCode, errorMessage, errorDescription);
+	}
+
+	public ApiResponse(String errorCode, String errorMessage, List<IntegrationExceptionProperty> properties) {
+		this.error = new ApiError(errorCode, errorMessage, properties);
+	}
+
+	public ApiResponse(ApiError error) {
+		this.error = error;
+	}
+
+	public T getResult() {
+		return this.result;
+	}
+
+	public void setResult(T result) {
+		this.result = result;
+	}
+
+	public ApiError getError() {
+		return this.error;
+	}
+
+	public void setError(ApiError error) {
+		this.error = error;
+	}

@@ -1,0 +1,5 @@
+package com.adidas.product.creation.rest.springbootswagger2.configuration;
+
+public class Swagger2UiConfiguration {
+
+}

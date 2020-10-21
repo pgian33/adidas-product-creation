@@ -1,0 +1,49 @@
+package com.adidas.product.creation.rest.bean;
+
+import java.util.Map.Entry;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+public class ShortestPathResponse {
+
+	private SortedMap<Integer, String> shortestPathCitiesMap;
+	private String shortesPathRepresentation;
+
+	public SortedMap<Integer, String> getShortestPathCitiesMap() {
+		return shortestPathCitiesMap;
+	}
+	public void setShortestPathCitiesMap(SortedMap<Integer, String> shortestPathCitiesMap) {
+		this.shortestPathCitiesMap = shortestPathCitiesMap;
+	}
+	public String getShortesPathRepresentation() {
+		return shortesPathRepresentation;
+	}
+	public void setShortesPathRepresentation(String shortesPathRepresentation) {
+		this.shortesPathRepresentation = shortesPathRepresentation;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShortestPathResponse [");
+		if (shortestPathCitiesMap != null) {
+			builder.append("shortestPathCitiesMap=");
+			for (Entry<Integer, String> entry : shortestPathCitiesMap.entrySet()) {
+				builder.append("Key: ");
+				builder.append(entry.getKey());
+				builder.append("Value: ");
+				builder.append(entry.getValue());
+			}
+			builder.append(shortestPathCitiesMap);
+			builder.append(", ");
+		}
+		if (shortesPathRepresentation != null) {
+			builder.append("shortesPathRepresentation=");
+			builder.append(shortesPathRepresentation);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+
+}

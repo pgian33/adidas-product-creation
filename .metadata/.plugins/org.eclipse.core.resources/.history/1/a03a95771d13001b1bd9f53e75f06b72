@@ -1,0 +1,30 @@
+package com.adidas.product.creation.rest.decoder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.openfeign.support.FeignUtils;
+import org.springframework.http.HttpStatus;
+
+import com.adidas.product.creation.rest.controller.ShortestPathController;
+
+import feign.Response;
+import feign.codec.ErrorDecoder;
+
+public class ServiceExceptionDecoder implements ErrorDecoder {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ShortestPathController.class);
+
+
+	@Override
+	public Exception decode(String methodKey, Response response) {
+		LOGGER.trace(">> decode()");
+		String reason = response.reason();
+		HttpStatus httpStatus = HttpStatus.resolve(response.status());
+		LOGGER.error("!! decode> An exception occurred during REST integration in: {} : Status Code={}, Reason={}",  methodKey, httpStatus, reason);
+		
+		
+		return null;
+
+
+	}
+}

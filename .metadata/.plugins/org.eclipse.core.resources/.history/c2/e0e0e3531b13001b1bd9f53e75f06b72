@@ -1,0 +1,18 @@
+package com.adidas.product.creation.rest.decoder;
+
+import feign.Response;
+import feign.codec.ErrorDecoder;
+
+public class ServiceExceptionDecoder implements ErrorDecoder {
+
+	@Override
+	public Exception decode(String methodKey, Response response) {
+			if(response.status() >= 400 && response.status() <= 499) {
+				return new 
+			}
+		return null;
+	}
+	
+	
+
+}

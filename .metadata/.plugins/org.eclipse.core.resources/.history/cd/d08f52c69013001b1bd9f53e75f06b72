@@ -1,0 +1,54 @@
+package com.adidas.product.creation.model.integration;
+
+import java.util.List;
+
+import com.adidas.product.creation.model.integration.enumeration.StatusEnumeration;
+
+public class ShortestPathModel {
+
+	private List<String> cities;
+	private String message;
+	private StatusEnumeration status;
+	
+	public List<String> getCities() {
+		return cities;
+	}
+	public void setCities(List<String> cities) {
+		this.cities = cities;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public StatusEnumeration getStatus() {
+		return status;
+	}
+	public void setStatus(StatusEnumeration status) {
+		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShortestPathModel [");
+		if (cities != null) {
+			builder.append("cities=");
+			cities.stream().forEach(aCity->
+			builder.append(aCity).append(", "));
+		}
+		if (message != null) {
+			builder.append("message=");
+			builder.append(message);
+			builder.append(", ");
+		}
+		if (status != null) {
+			builder.append("status=");
+			builder.append(status);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+}

@@ -1,0 +1,18 @@
+package com.adidas.product.creation.client.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class Neo4jQueryException extends Exception {
+
+	private static final long serialVersionUID = -8028818526810059109L;
+
+	private final String reason;
+
+	public Neo4jQueryException(String reason) {
+		this.reason = reason;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+}

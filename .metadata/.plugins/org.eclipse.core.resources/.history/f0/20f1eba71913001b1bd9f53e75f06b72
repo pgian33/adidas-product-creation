@@ -1,0 +1,11 @@
+package com.adidas.product.creation.rest.exception;
+
+public class ServiceException extends Exception {
+
+	private String errorCode;
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+}

@@ -1,0 +1,6 @@
+com\adidas\product\creation\client\repository\CityRepository.class
+com\adidas\product\creation\client\controller\RouteController.class
+com\adidas\product\creation\client\GreetingsController.class
+com\adidas\product\creation\client\entity\City.class
+com\adidas\product\creation\client\AdidasProductCreationClientApplication.class
+com\adidas\product\creation\client\entity\GoToRelationship.class

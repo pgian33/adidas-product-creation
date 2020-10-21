@@ -1,0 +1,100 @@
+package com.adidas.product.creation.rest.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.adidas.product.creation.model.integration.ShortestPathModel;
+import com.adidas.product.creation.rest.bean.ApiError;
+import com.adidas.product.creation.rest.bean.ApiResponse;
+import com.adidas.product.creation.rest.bean.ErrorCode;
+import com.adidas.product.creation.rest.bean.ShortestPathRequest;
+import com.adidas.product.creation.rest.bean.ShortestPathResponse;
+import com.adidas.product.creation.rest.client.ProductCreationClient;
+import com.adidas.product.creation.rest.exception.IntegrationException;
+import com.adidas.product.creation.rest.helper.ProductCreationHelper;
+
+
+@Component
+@RestController
+@RequestMapping(value = "/")
+public class ShortestPathController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ShortestPathController.class);
+
+	@Autowired
+	private ProductCreationClient productCreationClient;
+
+	@PostMapping("/connections-shortest-path")
+	public ResponseEntity<?> getConnectionsShortestPath(@RequestBody ShortestPathRequest shortestPathRequest) {
+		LOGGER.info(">> START getConnectionsShortestPath: shortestPathRequest={}", shortestPathRequest);
+		ShortestPathModel shortestPathModel = null;
+		try {
+			String departureCity = shortestPathRequest.getDepartureCity();
+			String destinationCity = shortestPathRequest.getDestinationCity();
+			
+			if(departureCity==null || departureCity.isEmpty()) {
+				throw new IntegrationException(ErrorCode.DEPARTURE_CITY_MISSING.getMessage(), HttpStatus.valueOf(ErrorCode.DEPARTURE_CITY_MISSING.getStatus()));
+			} else if(destinationCity==null || destinationCity.isEmpty()) {
+				throw new IntegrationException(ErrorCode.DESTINATION_CITY_MISSING.getMessage(), HttpStatus.valueOf(ErrorCode.DESTINATION_CITY_MISSING.getStatus()));
+			}
+			
+			shortestPathModel = productCreationClient.getConnectionsShortestPath(
+					ShortestPathRequest.formatCityName(departureCity), 
+					ShortestPathRequest.formatCityName(destinationCity));
+			
+			if(shortestPathModel != null) {
+				ShortestPathResponse shortestPathResponse = null;
+				if(shortestPathModel.getCities() != null) {
+					shortestPathResponse = ProductCreationHelper.getShortestPathFromJson(shortestPathModel.getCities());
+				} else {
+					shortestPathResponse = new ShortestPathResponse();
+					shortestPathResponse.setMessage(shortestPathModel.getMessage());
+					shortestPathResponse.setStatus(shortestPathModel.getStatus());
+				}
+				return new ResponseEntity<>(shortestPathResponse, HttpStatus.OK);
+			}
+			throw new IntegrationException(ErrorCode.GENERIC_ERROR.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+		} catch (IntegrationException e) {
+			LOGGER.error("!! ERROR getConnectionsShortestPath: An IntegrationException occurred", e);
+			return new ResponseEntity(e.getReason(), e.getStatus());
+		} catch (Exception ex) {
+			LOGGER.error("!! ERROR A Generic Exception Occurred", ex);
+			ApiError apiError = new ApiError(ErrorCode.GENERIC_ERROR.getMessage(), ex.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/time-shortest-path") 
+	public ApiResponse<ShortestPathResponse>getTimeShortestPath(@RequestBody ShortestPathRequest shortestPathRequest) {
+		LOGGER.info(">> START getConnectionsShortestPath: getTimeShortestPath={}", shortestPathRequest);
+		ShortestPathModel shortestPathModel = null;		
+		try {
+			shortestPathModel = productCreationClient.getTimeShortestPath(
+					ShortestPathRequest.formatCityName(shortestPathRequest.getDepartureCity()), 
+					ShortestPathRequest.formatCityName(shortestPathRequest.getDestinationCity()));
+			if(shortestPathModel != null) {
+				ShortestPathResponse shortestPathResponse = ProductCreationHelper.getShortestPathFromJson(shortestPathModel.getCities());
+				return new ApiResponse<>(shortestPathResponse);
+			}
+			throw new IntegrationException(ErrorCode.GENERIC_ERROR.getMessage(), "505");
+
+		} catch (IntegrationException e) {
+			LOGGER.error("!! ERROR getConnectionsShortestPath: An IntegrationException occurred", e);
+			ApiError apiError = new ApiError(ErrorCode.GENERIC_ERROR.getMessage(), e.getMessage());
+			return new ApiResponse<>(apiError);
+		} catch (Exception ex) {
+			LOGGER.error("!! ERROR A Generic Exception Occurred", ex);
+			ApiError apiError = new ApiError(ErrorCode.GENERIC_ERROR.getMessage(), ex.getMessage());
+			return new ApiResponse<>(apiError);
+		}
+	}
+}

@@ -1,0 +1,5 @@
+package com.adidas.product.creation.client.exception;
+
+public class Neo4jQueryException {
+
+}

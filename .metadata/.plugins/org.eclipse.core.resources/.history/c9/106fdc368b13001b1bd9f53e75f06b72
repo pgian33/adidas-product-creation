@@ -1,0 +1,44 @@
+package com.adidas.product.creation.model.integration;
+
+import java.util.List;
+
+public class XYZ {
+
+	private List<String> cities;
+	private String message;
+
+	public List<String> getCities() {
+		return cities;
+	}
+	public void setCities(List<String> cities) {
+		this.cities = cities;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("XYZ [");
+		if (cities != null) {
+			builder.append("cities=");
+			cities.forEach((String aCity) -> {
+				builder.append(cities);
+				builder.append(", "));
+			}
+		}
+		if (message != null) {
+			builder.append("message=");
+			builder.append(message);
+		}
+		builder.append("]");
+		return builder.toString();
+	}	
+
+
+
+
+}

@@ -1,0 +1,25 @@
+package com.adidas.product.creation.rest.decoder;
+
+import org.springframework.cloud.openfeign.support.FeignUtils;
+import org.springframework.http.HttpStatus;
+
+
+import feign.Response;
+import feign.codec.ErrorDecoder;
+
+public class ServiceExceptionDecoder implements ErrorDecoder {
+
+	@Override
+	public Exception decode(String methodKey, Response response) {
+		
+		HttpStatus httpStatus = HttpStatus.resolve(response.status());
+			if(response.status() >= 400 && response.status() <= 499) {
+				return new ServiceException(
+						)
+			}
+		return null;
+	}
+	
+	
+
+}

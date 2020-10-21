@@ -1,0 +1,39 @@
+package com.adidas.product.creation.rest.exception;
+
+import org.apache.http.HttpStatus;
+
+public class IntegrationException extends Exception {
+
+	private String errorCode;
+	private String reasone;
+	private HttpStatus status;
+	
+	public IntegrationException(String errorCode, String reasone, HttpStatus status) {
+		super();
+		this.errorCode = errorCode;
+		this.reasone = reasone;
+		this.status = status;
+	}
+	
+	public String getErrorCode() {
+		return errorCode;
+	}
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+	public String getReasone() {
+		return reasone;
+	}
+	public void setReasone(String reasone) {
+		this.reasone = reasone;
+	}
+	public HttpStatus getStatus() {
+		return status;
+	}
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+
+	
+
+}

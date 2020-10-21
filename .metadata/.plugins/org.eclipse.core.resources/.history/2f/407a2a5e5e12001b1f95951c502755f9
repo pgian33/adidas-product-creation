@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: adidas-product-creation-rest
+server:
+  port: 8080
+
+eureka:
+  profiles:
+    active: "docker"
+  main:
+    banner-mode: "off"
+
+eureka:
+  profiles: dev
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka
+  instance:
+    preferIpAddress: true
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 10000

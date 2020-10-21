@@ -1,0 +1,28 @@
+package com.adidas.product.creation.model.integration;
+
+import java.util.List;
+
+public class ShortestPathModel {
+
+	private List<String> cities;
+
+	public List<String> getCities() {
+		return cities;
+	}
+	public void setCities(List<String> cities) {
+		this.cities = cities;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShortestPathModel [");
+		if (cities != null) {
+			builder.append("cities=");
+			cities.stream().forEach(aCity->
+			builder.append(aCity).append(", "));
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+}

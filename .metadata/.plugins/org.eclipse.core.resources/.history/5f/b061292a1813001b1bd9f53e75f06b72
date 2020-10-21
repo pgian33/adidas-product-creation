@@ -1,0 +1,5 @@
+package com.adidas.product.creation.rest.exception;
+
+public class ServiceException {
+
+}

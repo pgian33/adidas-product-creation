@@ -1,0 +1,24 @@
+package com.adidas.product.creation.client.exception;
+
+public enum ErrorCode {
+	
+	GENERIC_ERROR(500, "A generic error occurred"),
+	DEPARTURE_CITY_MISSING(400, "Departure city must not be null/empty"),
+	DESTINATION_CITY_MISSING(400, "Destination city must not be null/empty"),
+	NO_RESULTS_FOUND(404, "No itineraries found");
+	
+	private Integer status;
+	private String message;
+	
+	private ErrorCode(Integer status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+	public String getMessage() {
+		return message;
+	}
+}

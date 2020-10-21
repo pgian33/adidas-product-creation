@@ -1,0 +1,5 @@
+package com.adidas.product.creation.integration.model.enumeration;
+
+public enum QueryResultEnumeration {
+
+}

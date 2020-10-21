@@ -1,0 +1,20 @@
+package com.adidas.product.creation.rest.exception;
+
+public class IntegrationException extends Exception {
+
+	private static final long serialVersionUID = -1611280895516423062L;
+	private final String reason;
+	private final String status;
+	
+	
+	public IntegrationException(String reason, String status) {
+		this.reason = reason;
+		this.status = status;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public String getStatus() {
+		return status;
+	}
+}

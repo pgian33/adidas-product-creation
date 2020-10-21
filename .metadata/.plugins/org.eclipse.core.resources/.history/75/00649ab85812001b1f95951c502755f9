@@ -1,0 +1,13 @@
+package com.adidas.product.creation;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AdidasProductCreationApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AdidasProductCreationApplication.class, args);
+	}
+
+}
